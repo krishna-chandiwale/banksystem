@@ -127,11 +127,10 @@
         const res = await BankAPI.register({
           fullName: name,
           email: email,
-          phoneNumber: phone,
+          phone: phone,
           accountType: type,
           initialDeposit: initialDeposit,
-          password: password,
-          address: 'Main Street Campus'
+          password: password
         });
         showToast('Registration complete in MySQL database!', 'success');
         sessionStorage.setItem('currentUserEmail', email);

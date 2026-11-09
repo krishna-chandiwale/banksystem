@@ -44,6 +44,13 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Embedded database for local development without a MySQL installation -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- 4. Spring Boot Validation: JSR-380 Bean Validation for secure input sanitization -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

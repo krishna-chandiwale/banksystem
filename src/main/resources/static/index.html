@@ -3,242 +3,662 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apex Banking Management System - Corporate Preview</title>
+  <title>Apex Premier Bank - Intelligent Modern Banking</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
   <style>
-    .portal-hero {
-      text-align: center;
-      padding: 50px 20px 36px;
-      max-width: 850px;
-      margin: 0 auto;
+    /* World-Class Premium Landing UI Styles */
+    :root {
+      --hero-gradient: radial-gradient(100% 80% at 50% 0%, #0d2847 0%, #061322 100%);
+      --accent-glow: 0 0 40px rgba(37, 99, 235, 0.28);
     }
-    .portal-hero h1 {
-      font-size: 2.3rem;
-      font-weight: 800;
-      color: var(--navy-950);
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
+
+    body {
+      background-color: #050d18;
+      color: #e2e8f0;
+      overflow-x: hidden;
     }
-    .portal-hero h1 span {
-      color: var(--blue-600);
-    }
-    .portal-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-      max-width: 1200px;
-      margin: 16px auto 60px;
-      padding: 0 20px;
-    }
-    .page-preview-card {
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all var(--transition-fast);
-      text-decoration: none;
-      box-shadow: var(--shadow-sm);
-    }
-    .page-preview-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--blue-600);
-      box-shadow: var(--shadow-md);
-    }
-    .page-num {
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
-      color: var(--blue-600);
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .page-card-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--navy-950);
-      margin-bottom: 6px;
-    }
-    .page-card-desc {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 18px;
-    }
-    .page-badge-row {
+
+    /* Premium Navigation Header */
+    .landing-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 13, 24, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 36px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: auto;
-      padding-top: 12px;
-      border-top: 1px solid var(--border-subtle);
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-icon-lux {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+
+    .brand-text-lux {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .brand-text-lux span {
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links-lux {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links-lux a {
+      color: #94a3b8;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links-lux a:hover {
+      color: #ffffff;
+    }
+
+    .nav-actions-lux {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* Hero Section */
+    .hero-lux {
+      position: relative;
+      background: var(--hero-gradient);
+      padding: 90px 24px 80px;
+      text-align: center;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-glow-orb {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: #60a5fa;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    .hero-headline {
+      font-size: 3.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      max-width: 900px;
+      margin: 0 auto 20px;
+      color: #ffffff;
+    }
+
+    .hero-headline span {
+      background: linear-gradient(135deg, #60a5fa 20%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtext {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      max-width: 680px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .btn-lux-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    .btn-lux-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.6);
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    .btn-lux-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-lux-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Key Metrics Bar */
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1080px;
+      margin: 0 auto 20px;
+      padding: 24px 32px;
+      background: rgba(15, 30, 52, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .metric-item {
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0 16px;
+    }
+
+    .metric-item:last-child {
+      border-right: none;
+    }
+
+    .metric-number {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .metric-desc {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* Showcase Card Container */
+    .card-showcase-wrap {
+      max-width: 1080px;
+      margin: 60px auto 0;
+      position: relative;
+    }
+
+    .hero-mockup-frame {
+      background: linear-gradient(180deg, rgba(22, 45, 78, 0.8) 0%, rgba(10, 22, 40, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 32px;
+      align-items: center;
+      text-align: left;
+    }
+
+    /* Feature Grid Section */
+    .features-section {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 0 24px;
+    }
+
+    .section-badge {
+      color: #38bdf8;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-title-lux {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .section-desc-lux {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      max-width: 600px;
+      line-height: 1.6;
+      margin-bottom: 50px;
+    }
+
+    .lux-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .lux-card {
+      background: rgba(15, 30, 52, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lux-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(59, 130, 246, 0.5);
+      background: rgba(18, 38, 68, 0.6);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .lux-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #60a5fa;
+      margin-bottom: 22px;
+    }
+
+    .lux-card-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .lux-card-desc {
+      font-size: 0.92rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    /* Security & Compliance Banner */
+    .security-banner {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 48px;
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    .landing-footer {
+      background: #030811;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 60px 36px 36px;
+      color: #64748b;
+      font-size: 0.88rem;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+      color: #94a3b8;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col ul li a:hover {
+      color: #ffffff;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links-lux { display: none; }
+      .metrics-bar { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .hero-mockup-frame { grid-template-columns: 1fr; }
+      .hero-headline { font-size: 2.6rem; }
+      .footer-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <div class="portal-hero">
-    <div class="brand-badge" style="display: inline-block; margin-bottom: 12px; background: var(--blue-50); color: var(--blue-600);">
-      CORPORATE BANKING ARCHITECTURE
+  <!-- Premium Top Navigation -->
+  <nav class="landing-nav">
+    <a href="index.html" class="brand-logo-wrap">
+      <div class="brand-icon-lux">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L2 7v2h20V7L12 2zm0 3.3L16.2 7H7.8L12 5.3zM4 11v7h3v-7H4zm6 0v7h4v-7h-4zm7 0v7h3v-7h-3zm-15 9v2h20v-2H2z"/>
+        </svg>
+      </div>
+      <div class="brand-text-lux">APEX <span>PREMIER</span></div>
+    </a>
+
+    <ul class="nav-links-lux">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#rates">High-Yield Rates</a></li>
+      <li><a href="login.html">Personal Banking</a></li>
+    </ul>
+
+    <div class="nav-actions-lux">
+      <a href="login.html" class="btn-lux-secondary" style="padding: 10px 20px; font-size: 0.9rem;">Sign In</a>
+      <a href="register.html" class="btn-lux-primary" style="padding: 10px 22px; font-size: 0.9rem;">Open Account</a>
     </div>
-    <h1>Apex Banking <span>Management System</span></h1>
-    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6;">
-      Redesigned corporate banking portal featuring a professional Navy & Royal Blue theme,
-      soft-deletion safety controls, saved payee management, and an immutable audit ledger.
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-lux">
+    <div class="hero-glow-orb"></div>
+
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Member FDIC &bull; 256-Bit Financial Encryption Active
+    </div>
+
+    <h1 class="hero-headline">
+      Intelligent Banking for <span>Modern Wealth</span>
+    </h1>
+
+    <p class="hero-subtext">
+      Experience institutional-grade financial control. Earn 4.2% APY on liquid savings, execute zero-fee instant domestic transfers, and safeguard assets with continuous algorithmic fraud surveillance.
     </p>
 
-    <div style="display: flex; justify-content: center; gap: 12px; margin-top: 22px; flex-wrap: wrap;">
-      <a href="dashboard.html" class="btn btn-primary">
-        Open Customer Dashboard
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+    <div class="hero-cta-group">
+      <a href="login.html" class="btn-lux-primary">
+        Enter Online Banking Portal
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
       </a>
-      <a href="admin.html" class="btn btn-secondary">
-        Open Admin Panel (Account Deletion & Safety)
-      </a>
-      <a href="login.html" class="btn btn-outline">
-        Login Portal
+      <a href="register.html" class="btn-lux-secondary">
+        Apply for New Account
       </a>
     </div>
-  </div>
 
-  <div class="portal-grid">
-    
-    <!-- 1. Login Page -->
-    <a href="login.html" class="page-preview-card">
+    <!-- Live Metrics Bar -->
+    <div class="metrics-bar">
+      <div class="metric-item">
+        <div class="metric-number">4.2%</div>
+        <div class="metric-desc">High-Yield APY</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-number">$250k</div>
+        <div class="metric-desc">FDIC Protection</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-number">&lt; 0.8s</div>
+        <div class="metric-desc">Transfer Latency</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-number">100%</div>
+        <div class="metric-desc">Zero Hidden Fees</div>
+      </div>
+    </div>
+
+    <!-- Interactive Card & Account Showcase -->
+    <div class="card-showcase-wrap">
+      <div class="hero-mockup-frame">
+        <div>
+          <!-- Executive Obsidian Card -->
+          <div class="virtual-card-wrapper" style="background: linear-gradient(135deg, #0b1f3b 0%, #173864 50%, #081628 100%); border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6);">
+            <div class="card-top">
+              <div class="bank-logo-text" style="display: flex; align-items: center; gap: 8px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#60a5fa"><path d="M12 2L2 7v2h20V7L12 2zm0 3.3L16.2 7H7.8L12 5.3zM4 11v7h3v-7H4zm6 0v7h4v-7h-4zm7 0v7h3v-7h-3zm-15 9v2h20v-2H2z"/></svg>
+                APEX PREMIER
+              </div>
+              <div class="card-chip"></div>
+            </div>
+
+            <div class="card-number">4892 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 2049</div>
+
+            <div class="card-bottom">
+              <div>
+                <div class="card-holder-label">Account Holder</div>
+                <div class="card-holder-name">Alex Morgan</div>
+              </div>
+              <div style="text-align: right;">
+                <div class="card-holder-label">Valid Thru</div>
+                <div class="card-valid-thru">08/30</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size: 0.78rem; text-transform: uppercase; color: #38bdf8; font-weight: 700; letter-spacing: 0.08em;">Live Customer View</span>
+          <h3 style="font-size: 1.7rem; font-weight: 800; color: #ffffff; margin: 6px 0 12px;">Instant Online Banking Experience</h3>
+          <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 22px;">
+            Full liquidity at your fingertips. Transfer to trusted payees, deposit funds instantly, and review comprehensive monthly activity statements.
+          </p>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="dashboard.html" class="btn-lux-primary" style="padding: 10px 20px; font-size: 0.88rem;">
+              Open Customer Portal
+            </a>
+            <a href="deposit.html" class="btn-lux-secondary" style="padding: 10px 20px; font-size: 0.88rem;">
+              Make Deposit
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Core Banking Features -->
+  <section id="features" class="features-section">
+    <div style="text-align: center;">
+      <div class="section-badge">Financial Engineering</div>
+      <h2 class="section-title-lux">Engineered for Frictionless Wealth Management</h2>
+      <p class="section-desc-lux" style="margin-left: auto; margin-right: auto;">
+        Every component of Apex Premier Bank has been tailored to provide instantaneous, highly secure financial services.
+      </p>
+    </div>
+
+    <div class="lux-grid">
+      <!-- Feature 1 -->
+      <div class="lux-card">
+        <div class="lux-icon">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 class="lux-card-title">4.2% APY High-Yield Savings</h3>
+        <p class="lux-card-desc">Maximize every dollar. Compound daily yields on full deposits with zero lock-in durations and automatic overdraft protection.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="lux-card">
+        <div class="lux-icon">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+        </div>
+        <h3 class="lux-card-title">Instant P2P Fund Transfers</h3>
+        <p class="lux-card-desc">Dispatch payments to any account inside the network with zero delay. Save frequent payees for one-click settlement.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="lux-card">
+        <div class="lux-icon">
+          <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <h3 class="lux-card-title">Immutable Audit Trail</h3>
+        <p class="lux-card-desc">Every financial movement is permanently logged with cryptographic transaction identifiers for regulatory peace of mind.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security Banner -->
+  <section id="security" style="padding: 0 24px;">
+    <div class="security-banner">
       <div>
-        <div class="page-num">PAGE 01</div>
-        <div class="page-card-title">Online Banking Login</div>
-        <div class="page-card-desc">Customer and administrator authentication with security credentials, 256-bit encryption badge, and demo auto-fill.</div>
+        <div class="section-badge" style="color: #10b981;">Bank-Grade Safeguards</div>
+        <h2 style="font-size: 2.1rem; font-weight: 800; color: #ffffff; margin-bottom: 12px;">Institutional Protection for Every Account</h2>
+        <p style="color: #94a3b8; font-size: 0.98rem; max-width: 580px; line-height: 1.6;">
+          Your funds are backed by federal FDIC insurance limits, multi-layer BCrypt credential hashing, and zero-liability protections across all debit transactions.
+        </p>
       </div>
-      <div class="page-badge-row">
-        <span class="badge badge-info">Authentication</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
 
-    <!-- 2. Customer Registration -->
-    <a href="register.html" class="page-preview-card">
       <div>
-        <div class="page-num">PAGE 02</div>
-        <div class="page-card-title">Customer Registration</div>
-        <div class="page-card-desc">New account application form with account type selection, minimum deposit verification, and instant virtual card creation.</div>
+        <a href="register.html" class="btn-lux-primary" style="padding: 14px 28px;">
+          Create Your Account Today
+        </a>
       </div>
-      <div class="page-badge-row">
-        <span class="badge badge-success">Onboarding</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
+    </div>
+  </section>
 
-    <!-- 3. Banking Dashboard -->
-    <a href="dashboard.html" class="page-preview-card">
+  <!-- Premium Footer -->
+  <footer class="landing-footer">
+    <div class="footer-grid">
       <div>
-        <div class="page-num">PAGE 03</div>
-        <div class="page-card-title">Banking Dashboard</div>
-        <div class="page-card-desc">Financial hub with executive navy debit card, real-time balance metrics, quick operations, and saved beneficiaries list.</div>
+        <div class="brand-text-lux" style="margin-bottom: 14px;">APEX <span>PREMIER BANK</span></div>
+        <p style="line-height: 1.6; max-width: 340px; margin-bottom: 20px;">
+          Next-generation financial infrastructure combining collegiate project excellence with commercial-grade security.
+        </p>
+        <span class="badge badge-success" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">
+          SYSTEM ONLINE &bull; 100% OPERATIONAL
+        </span>
       </div>
-      <div class="page-badge-row">
-        <span class="badge badge-success">Core Portal</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
 
-    <!-- 4. Deposit Money -->
-    <a href="deposit.html" class="page-preview-card">
+      <div class="footer-col">
+        <h4>Personal Accounts</h4>
+        <ul>
+          <li><a href="dashboard.html">Online Dashboard</a></li>
+          <li><a href="deposit.html">Direct Deposit</a></li>
+          <li><a href="transfer.html">P2P Transfers</a></li>
+          <li><a href="transactions.html">Official Statements</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Security & Legal</h4>
+        <ul>
+          <li><a href="#">FDIC Insurance Policy</a></li>
+          <li><a href="#">Privacy Protocol</a></li>
+          <li><a href="#">Cardholder Agreement</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Corporate Portal</h4>
+        <ul>
+          <li><a href="login.html">Client Authentication</a></li>
+          <li><a href="register.html">Account Opening</a></li>
+          <li><a href="dashboard.html">Online Banking Hub</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Apex Premier Banking Systems Inc. All rights reserved. Member FDIC. Equal Housing Lender.</div>
       <div>
-        <div class="page-num">PAGE 04</div>
-        <div class="page-card-title">Deposit Money</div>
-        <div class="page-card-desc">Direct account credit interface with quick amount selector pills ($100 to $5000), channel selection, and balance updates.</div>
+        <a href="login.html" style="color: #60a5fa; margin-right: 14px;">Client Sign In</a>
+        <a href="register.html" style="color: #94a3b8;">Open Account</a>
       </div>
-      <div class="page-badge-row">
-        <span class="badge badge-success">Credit Operation</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
-
-    <!-- 5. Withdraw Money -->
-    <a href="withdraw.html" class="page-preview-card">
-      <div>
-        <div class="page-num">PAGE 05</div>
-        <div class="page-card-title">Withdraw Cash</div>
-        <div class="page-card-desc">Cash withdrawal with automated overdraft protection: strictly prevents withdrawing more than the available balance.</div>
-      </div>
-      <div class="page-badge-row">
-        <span class="badge badge-danger">Debit Operation</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
-
-    <!-- 6. Money Transfer -->
-    <a href="transfer.html" class="page-preview-card">
-      <div>
-        <div class="page-num">PAGE 06</div>
-        <div class="page-card-title">Money Transfer & Beneficiaries</div>
-        <div class="page-card-desc">Transfer funds with saved payees list, quick payee selection, and confirmation modal before removing any saved beneficiary.</div>
-      </div>
-      <div class="page-badge-row">
-        <span class="badge badge-info">P2P Transfers & Delete</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
-
-    <!-- 7. Transaction History -->
-    <a href="transactions.html" class="page-preview-card">
-      <div>
-        <div class="page-num">PAGE 07</div>
-        <div class="page-card-title">Transaction History & Statement</div>
-        <div class="page-card-desc">Official statement ledger with dynamic filtering and search. Includes regulatory notice: records cannot be deleted or altered.</div>
-      </div>
-      <div class="page-badge-row">
-        <span class="badge badge-info">Auditing & Compliance</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
-
-    <!-- 8. Admin Dashboard -->
-    <a href="admin.html" class="page-preview-card">
-      <div>
-        <div class="page-num">PAGE 08</div>
-        <div class="page-card-title">Admin Dashboard & Customer Management</div>
-        <div class="page-card-desc">Master administration to deactivate accounts or purge inactive records. Enforces safety rule: accounts with balance &gt; $0 cannot be deleted.</div>
-      </div>
-      <div class="page-badge-row">
-        <span class="badge badge-warning">Admin & Delete Safety</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
-
-    <!-- 9. Account Details -->
-    <a href="account-details.html" class="page-preview-card">
-      <div>
-        <div class="page-num">PAGE 09</div>
-        <div class="page-card-title">Account Details & Statement</div>
-        <div class="page-card-desc">Comprehensive account breakdown with IBAN, Swift code, daily limits, interest rates, account status, and transaction ledger.</div>
-      </div>
-      <div class="page-badge-row">
-        <span class="badge badge-info">Account Breakdown</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
-
-    <!-- 10. Profile Management -->
-    <a href="profile.html" class="page-preview-card">
-      <div>
-        <div class="page-num">PAGE 10</div>
-        <div class="page-card-title">Profile Management & Settings</div>
-        <div class="page-card-desc">Customer profile update portal with personal info editor, contact phone, residential address, password change, and security settings.</div>
-      </div>
-      <div class="page-badge-row">
-        <span class="badge badge-success">Settings & Profile</span>
-        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
-      </div>
-    </a>
-
-  </div>
-
-  <footer style="text-align: center; padding: 24px; color: var(--text-muted); font-size: 0.82rem; border-top: 1px solid var(--border-color);">
-    Apex Banking Management System • College Project Architecture • Built with Java, Spring Boot, HTML, CSS & JavaScript
+    </div>
   </footer>
 
 </body>

@@ -1,10 +1,30 @@
 /**
- * Banking Management System - Core Frontend Application Logic
- * Corporate Theme with Strict Deletion Safety & Confirmation Modals
+ * Apex Banking Management System - Core Frontend Application Engine
+ * Premium Fintech Experience with Real-Time Spring Boot REST Sync
  */
 
+// Global User Context
+function getCurrentUserEmail() {
+  return sessionStorage.getItem('currentUserEmail') || 'alex.morgan@college.edu';
+}
+
+function setCurrentUserEmail(email) {
+  sessionStorage.setItem('currentUserEmail', email);
+}
+
+// Currency Formatter
+function formatUSD(num) {
+  if (num === null || num === undefined || isNaN(num)) return '$0.00';
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(num);
+}
+
 // Universal Modal Confirmation Dialog
-function showConfirmDialog({ title, message, confirmText = 'Confirm Delete', confirmClass = 'btn-danger', onConfirm }) {
+function showConfirmDialog({ title, message, confirmText = 'Confirm', confirmClass = 'btn-danger', onConfirm }) {
   let backdrop = document.getElementById('globalConfirmModal');
   if (!backdrop) {
     backdrop = document.createElement('div');
@@ -36,7 +56,6 @@ function showConfirmDialog({ title, message, confirmText = 'Confirm Delete', con
   actionBtn.textContent = confirmText;
   actionBtn.className = `btn ${confirmClass}`;
 
-  // Close handlers
   const closeModal = () => {
     backdrop.classList.remove('active');
   };
@@ -67,9 +86,11 @@ function showToast(message, type = 'success') {
   toast.className = `toast ${type}`;
   toast.innerHTML = `
     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      ${type === 'success' 
-        ? '<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>' 
-        : '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>'}
+      ${type === 'success'
+        ? '<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>'
+        : (type === 'info'
+            ? '<path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>'
+            : '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>')}
     </svg>
     <span>${message}</span>
   `;
@@ -78,7 +99,7 @@ function showToast(message, type = 'success') {
   setTimeout(() => {
     toast.style.animation = 'slideIn 0.25s ease reverse forwards';
     setTimeout(() => toast.remove(), 250);
-  }, 3500);
+  }, 4000);
 }
 
 // Helpers
@@ -101,42 +122,116 @@ function initMobileToggle() {
   }
 }
 
-// Synchronize Customer Details across UI
-function syncCustomerUI() {
-  const data = getBankData();
-  const c = data.customer;
+// Synchronize Customer Details across UI from Spring Boot REST API
+async function syncCustomerUI() {
+  const email = getCurrentUserEmail();
 
-  document.querySelectorAll('.val-balance').forEach(el => el.textContent = formatUSD(c.balance));
-  document.querySelectorAll('.val-income').forEach(el => el.textContent = formatUSD(c.monthlyIncome));
-  document.querySelectorAll('.val-expense').forEach(el => el.textContent = formatUSD(c.monthlyExpense));
-  document.querySelectorAll('.val-savings').forEach(el => el.textContent = formatUSD(c.savingsGoal));
-  document.querySelectorAll('.val-accno').forEach(el => el.textContent = c.accountNumber);
-  document.querySelectorAll('.val-name').forEach(el => el.textContent = c.fullName);
-  document.querySelectorAll('.val-acctype').forEach(el => el.textContent = c.accountType);
+  // Try fetching live data from backend API
+  try {
+    const liveAccount = await BankAPI.getAccountDetails(email);
+    if (liveAccount) {
+      applyCustomerDataToDOM({
+        fullName: liveAccount.fullName,
+        email: liveAccount.email,
+        phone: liveAccount.phone,
+        accountNumber: liveAccount.accountNumber,
+        accountType: liveAccount.accountType,
+        balance: liveAccount.balance,
+        status: liveAccount.status
+      });
 
-  renderBeneficiaryList();
+      // Update local storage cache
+      if (typeof getBankData === 'function' && typeof saveBankData === 'function') {
+        const local = getBankData();
+        local.customer.fullName = liveAccount.fullName;
+        local.customer.email = liveAccount.email;
+        local.customer.phone = liveAccount.phone;
+        local.customer.accountNumber = liveAccount.accountNumber;
+        local.customer.accountType = liveAccount.accountType;
+        local.customer.balance = liveAccount.balance;
+        local.customer.status = liveAccount.status;
+        saveBankData(local);
+      }
+    } else {
+      loadFallbackLocalData();
+    }
+  } catch (e) {
+    console.warn('API sync fallback to local cache:', e);
+    loadFallbackLocalData();
+  }
+
+  // Load Beneficiaries & Transactions
+  await renderBeneficiaryList();
+  if (document.getElementById('transactionRows')) {
+    await renderTransactions(window.currentTxFilter || 'ALL');
+  }
 }
 
-// Render Saved Beneficiaries (Clean list with Pay button; delete option removed from this side)
-function renderBeneficiaryList() {
+function loadFallbackLocalData() {
+  if (typeof getBankData === 'function') {
+    const data = getBankData();
+    applyCustomerDataToDOM(data.customer);
+  }
+}
+
+function applyCustomerDataToDOM(c) {
+  if (!c) return;
+  document.querySelectorAll('.val-balance').forEach(el => el.textContent = formatUSD(c.balance));
+  document.querySelectorAll('.val-income').forEach(el => el.textContent = formatUSD(c.monthlyIncome || (c.balance * 0.25)));
+  document.querySelectorAll('.val-expense').forEach(el => el.textContent = formatUSD(c.monthlyExpense || (c.balance * 0.12)));
+  document.querySelectorAll('.val-savings').forEach(el => el.textContent = formatUSD(c.savingsGoal || 30000));
+  document.querySelectorAll('.val-accno').forEach(el => el.textContent = c.accountNumber);
+  document.querySelectorAll('.val-name').forEach(el => el.textContent = c.fullName);
+  document.querySelectorAll('.val-email').forEach(el => el.textContent = c.email);
+  document.querySelectorAll('.val-phone').forEach(el => el.textContent = c.phone || '+1 (555) 000-0000');
+  document.querySelectorAll('.val-acctype').forEach(el => el.textContent = (c.accountType || 'SAVINGS') + ' ACCOUNT');
+  document.querySelectorAll('.val-source-acc').forEach(el => {
+    el.value = `${c.accountNumber} (${c.fullName} - ${c.accountType || 'SAVINGS'})`;
+  });
+  
+  // Avatar initials
+  const initials = (c.fullName || 'User').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+  document.querySelectorAll('.user-avatar.val-name, .val-initials').forEach(el => el.textContent = initials);
+}
+
+// Render Saved Beneficiaries
+async function renderBeneficiaryList() {
   const container = document.getElementById('beneficiaryList');
   if (!container) return;
 
-  const data = getBankData();
-  const list = data.beneficiaries || [];
+  const email = getCurrentUserEmail();
+  let list = [];
+
+  try {
+    const liveBeneficiaries = await BankAPI.getBeneficiaries(email);
+    if (liveBeneficiaries && liveBeneficiaries.length > 0) {
+      list = liveBeneficiaries.map(b => ({
+        id: b.id,
+        name: b.name,
+        accountNumber: b.accountNumber,
+        bankName: b.bankName || 'Apex Banking Network'
+      }));
+    }
+  } catch (err) {
+    console.warn('Could not load live beneficiaries, using local list:', err);
+  }
+
+  if (list.length === 0 && typeof getBankData === 'function') {
+    list = getBankData().beneficiaries || [];
+  }
 
   if (list.length === 0) {
-    container.innerHTML = `<div style="color: var(--text-muted); font-size: 0.85rem; padding: 14px 0; text-align: center;">No saved payees registered.</div>`;
+    container.innerHTML = `<div style="color: var(--text-muted); font-size: 0.85rem; padding: 18px 0; text-align: center;">No saved payees registered.</div>`;
     return;
   }
 
   container.innerHTML = list.map(b => `
     <div class="beneficiary-item">
       <div style="display: flex; align-items: center; gap: 12px;">
-        <div class="beneficiary-avatar">${b.name.split(' ').map(n=>n[0]).join('')}</div>
+        <div class="beneficiary-avatar">${(b.name || 'P').split(' ').map(n=>n[0]).join('').substring(0,2)}</div>
         <div>
-          <div style="font-weight: 700; font-size: 0.88rem; color: var(--navy-950);">${b.name}</div>
-          <div style="font-size: 0.76rem; color: var(--text-muted);">${b.bankName} • <span style="font-family: var(--font-mono); font-weight: 600;">${b.accountNumber}</span></div>
+          <div style="font-weight: 700; font-size: 0.9rem; color: var(--navy-950);">${b.name}</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted);">${b.bankName || 'Apex Network'} • <span style="font-family: var(--font-mono); font-weight: 600;">${b.accountNumber}</span></div>
         </div>
       </div>
       <div style="display: flex; align-items: center; gap: 8px;">
@@ -155,14 +250,36 @@ function selectBeneficiary(accNo) {
   }
 }
 
-// Render Transactions with Delete Option on the Right
-function renderTransactions(filterType = 'ALL') {
+// Render Transactions from Spring Boot / JPA Database
+async function renderTransactions(filterType = 'ALL') {
   const tableBody = document.getElementById('transactionRows');
   if (!tableBody) return;
 
   window.currentTxFilter = filterType;
-  const data = getBankData();
-  let list = data.transactions || [];
+  const email = getCurrentUserEmail();
+  let list = [];
+
+  try {
+    const liveTxns = await BankAPI.getTransactionHistory(email);
+    if (liveTxns && liveTxns.length > 0) {
+      list = liveTxns.map(t => ({
+        id: t.id,
+        ref: t.transactionRef || t.ref,
+        type: t.transactionType || t.type,
+        amount: t.amount,
+        balanceAfter: t.balanceAfter,
+        description: t.description,
+        date: (t.transactionDate || t.date || '').replace('T', ' ').substring(0, 19),
+        status: t.status || 'SUCCESS'
+      }));
+    }
+  } catch (e) {
+    console.warn('Failed to fetch live transactions, using fallback:', e);
+  }
+
+  if (list.length === 0 && typeof getBankData === 'function') {
+    list = getBankData().transactions || [];
+  }
 
   if (filterType !== 'ALL') {
     list = list.filter(t => t.type === filterType);
@@ -172,7 +289,7 @@ function renderTransactions(filterType = 'ALL') {
 
   if (list.length === 0) {
     const colSpan = isStatementPage ? 7 : 6;
-    tableBody.innerHTML = `<tr><td colspan="${colSpan}" style="text-align: center; color: var(--text-muted); padding: 30px;">No matching transactions found.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="${colSpan}" style="text-align: center; color: var(--text-muted); padding: 32px; font-size: 0.9rem;">No matching transactions recorded.</td></tr>`;
     return;
   }
 
@@ -187,127 +304,100 @@ function renderTransactions(filterType = 'ALL') {
         <td><span class="tx-ref">${t.ref}</span></td>
         <td><span class="badge ${badgeType}">${t.type}</span></td>
         <td><span style="font-weight: 500;">${t.description}</span></td>
-        <td><span style="color: var(--text-muted); font-size: 0.8rem;">${t.date}</span></td>
+        <td><span style="color: var(--text-muted); font-size: 0.82rem; font-family: var(--font-mono);">${t.date}</span></td>
         <td><span class="${amountClass}">${sign}${formatUSD(t.amount)}</span></td>
         ${isStatementPage ? `<td><span style="font-family: var(--font-mono); font-weight: 600;">${formatUSD(t.balanceAfter)}</span></td>` : ''}
         <td style="text-align: right;">
-          <button type="button" class="btn btn-danger-outline btn-sm" onclick="promptDeleteTransaction(${t.id}, '${t.ref}')" title="Delete transaction record">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-            Delete
-          </button>
+          <span class="badge badge-success" style="font-size: 0.72rem;">Verified</span>
         </td>
       </tr>
     `;
   }).join('');
 }
 
-// Delete Transaction Record with Confirmation Dialog
-function promptDeleteTransaction(id, ref) {
-  showConfirmDialog({
-    title: 'Delete Transaction Record',
-    message: `Are you sure you want to delete transaction ${ref}? This entry will be permanently removed from your activity list.`,
-    confirmText: 'Yes, Delete Record',
-    confirmClass: 'btn-danger',
-    onConfirm: () => {
-      const data = getBankData();
-      data.transactions = (data.transactions || []).filter(t => t.id !== id && t.ref !== ref);
-      saveBankData(data);
-      renderTransactions(window.currentTxFilter || 'ALL');
-      showToast(`Transaction ${ref} was successfully deleted.`, 'success');
-    }
-  });
-}
-
-// Deposit Money Handler
-function handleDeposit(e) {
+// Deposit Money Handler (Calls Spring Boot Backend /api/transactions/deposit)
+async function handleDeposit(e) {
   e.preventDefault();
   const amountInput = document.getElementById('depositAmount');
   const amount = parseFloat(amountInput.value);
+  const note = document.getElementById('depositNote')?.value || 'Online Account Deposit';
 
   if (isNaN(amount) || amount <= 0) {
     showToast('Please enter a valid deposit amount greater than $0.', 'error');
     return;
   }
 
-  const data = getBankData();
-  data.customer.balance += amount;
-  data.customer.monthlyIncome += amount;
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Processing Deposit...';
+  }
 
-  const newTxn = {
-    id: Date.now(),
-    ref: generateTxnRef(),
-    type: 'DEPOSIT',
-    amount: amount,
-    balanceAfter: data.customer.balance,
-    description: document.getElementById('depositNote')?.value || 'Online Account Deposit',
-    date: getNowFormatted(),
-    status: 'SUCCESS'
-  };
+  const email = getCurrentUserEmail();
 
-  data.transactions.unshift(newTxn);
-  saveBankData(data);
-
-  amountInput.value = '';
-  syncCustomerUI();
-  showToast(`Successfully deposited ${formatUSD(amount)} into your account!`, 'success');
+  try {
+    const res = await BankAPI.deposit(email, amount, note);
+    showToast(`Successfully deposited ${formatUSD(amount)} into your account!`, 'success');
+    amountInput.value = '';
+    if (document.getElementById('depositNote')) document.getElementById('depositNote').value = '';
+    await syncCustomerUI();
+  } catch (err) {
+    showToast(`Deposit failed: ${err.message}`, 'error');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `Complete Deposit <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
+    }
+  }
 }
 
-// Withdraw Money Handler
-function handleWithdraw(e) {
+// Withdraw Money Handler (Calls Spring Boot Backend /api/transactions/withdraw)
+async function handleWithdraw(e) {
   e.preventDefault();
   const amountInput = document.getElementById('withdrawAmount');
   const amount = parseFloat(amountInput.value);
-  const data = getBankData();
+  const note = document.getElementById('withdrawNote')?.value || 'Cash Counter / ATM Withdrawal';
 
   if (isNaN(amount) || amount <= 0) {
     showToast('Please enter a valid withdrawal amount.', 'error');
     return;
   }
 
-  if (amount > data.customer.balance) {
-    showToast(`Insufficient funds! Your available balance is ${formatUSD(data.customer.balance)}.`, 'error');
-    return;
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Processing Withdrawal...';
   }
 
-  data.customer.balance -= amount;
-  data.customer.monthlyExpense += amount;
+  const email = getCurrentUserEmail();
 
-  const newTxn = {
-    id: Date.now(),
-    ref: generateTxnRef(),
-    type: 'WITHDRAWAL',
-    amount: amount,
-    balanceAfter: data.customer.balance,
-    description: document.getElementById('withdrawNote')?.value || 'Cash Counter / ATM Withdrawal',
-    date: getNowFormatted(),
-    status: 'SUCCESS'
-  };
-
-  data.transactions.unshift(newTxn);
-  saveBankData(data);
-
-  amountInput.value = '';
-  syncCustomerUI();
-  showToast(`Successfully withdrawn ${formatUSD(amount)} from your account!`, 'success');
+  try {
+    const res = await BankAPI.withdraw(email, amount, note);
+    showToast(`Successfully withdrew ${formatUSD(amount)} from your account!`, 'success');
+    amountInput.value = '';
+    if (document.getElementById('withdrawNote')) document.getElementById('withdrawNote').value = '';
+    await syncCustomerUI();
+  } catch (err) {
+    showToast(`Withdrawal rejected: ${err.message}`, 'error');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `Confirm Cash Withdrawal <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
+    }
+  }
 }
 
-// Transfer Money Handler
-function handleTransfer(e) {
+// Transfer Money Handler (Calls Spring Boot Backend /api/transactions/transfer)
+async function handleTransfer(e) {
   e.preventDefault();
   const targetAcc = document.getElementById('targetAccount').value.trim();
   const amountInput = document.getElementById('transferAmount');
   const amount = parseFloat(amountInput.value);
   const note = document.getElementById('transferNote')?.value || `Transfer to ${targetAcc}`;
   const savePayee = document.getElementById('saveBeneficiaryCheckbox')?.checked;
-  const data = getBankData();
 
   if (!targetAcc || targetAcc.length < 8) {
     showToast('Please enter a valid recipient account number.', 'error');
-    return;
-  }
-
-  if (targetAcc.toUpperCase() === data.customer.accountNumber) {
-    showToast('Self-transfer is not permitted: You cannot transfer funds to your own account number.', 'error');
     return;
   }
 
@@ -316,45 +406,32 @@ function handleTransfer(e) {
     return;
   }
 
-  if (amount > data.customer.balance) {
-    showToast(`Transfer failed: Insufficient funds (${formatUSD(data.customer.balance)} available).`, 'error');
-    return;
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Transmitting Transfer...';
   }
 
-  data.customer.balance -= amount;
-  data.customer.monthlyExpense += amount;
+  const email = getCurrentUserEmail();
 
-  const newTxn = {
-    id: Date.now(),
-    ref: generateTxnRef(),
-    type: 'TRANSFER',
-    amount: amount,
-    balanceAfter: data.customer.balance,
-    description: `Transfer to Account ${targetAcc} (${note})`,
-    date: getNowFormatted(),
-    status: 'SUCCESS'
-  };
-
-  data.transactions.unshift(newTxn);
-
-  if (savePayee && !(data.beneficiaries || []).some(b => b.accountNumber === targetAcc)) {
-    data.beneficiaries.push({
-      id: 'ben-' + Date.now(),
-      name: `Beneficiary (${targetAcc})`,
-      accountNumber: targetAcc,
-      bankName: 'Apex Banking Network',
-      dateAdded: getNowFormatted().substring(0, 10)
-    });
+  try {
+    const res = await BankAPI.transfer(email, targetAcc, amount, note, savePayee);
+    showToast(`Successfully transferred ${formatUSD(amount)} to ${targetAcc}!`, 'success');
+    amountInput.value = '';
+    document.getElementById('targetAccount').value = '';
+    if (document.getElementById('transferNote')) document.getElementById('transferNote').value = '';
+    await syncCustomerUI();
+  } catch (err) {
+    showToast(`Transfer failed: ${err.message}`, 'error');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `Send Transfer Now <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
+    }
   }
-
-  saveBankData(data);
-
-  amountInput.value = '';
-  syncCustomerUI();
-  showToast(`Transferred ${formatUSD(amount)} successfully to Account ${targetAcc}!`, 'success');
 }
 
-// Preset Pills
+// Preset Pills Selector
 function initPresetPills(inputId) {
   document.querySelectorAll('.preset-pill').forEach(pill => {
     pill.addEventListener('click', () => {
@@ -367,6 +444,7 @@ function initPresetPills(inputId) {
   });
 }
 
+// Initialize Application on Page Load
 document.addEventListener('DOMContentLoaded', () => {
   initMobileToggle();
   syncCustomerUI();

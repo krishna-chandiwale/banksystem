@@ -174,6 +174,31 @@ const BankAPI = {
     }
   },
 
+  // Beneficiaries
+  async getBeneficiaries(email) {
+    try {
+      const res = await fetch(`${API_BASE}/beneficiaries?email=${encodeURIComponent(email)}`);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to retrieve beneficiaries');
+      return data.data;
+    } catch (err) {
+      console.warn('Backend API beneficiaries error:', err.message);
+      return null;
+    }
+  },
+
+  async deleteBeneficiary(id) {
+    try {
+      const res = await fetch(`${API_BASE}/beneficiaries/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to remove beneficiary');
+      return data;
+    } catch (err) {
+      console.warn('Backend API delete beneficiary error:', err.message);
+      throw err;
+    }
+  },
+
   // Admin: Get Customer Directory
   async getAdminUsers() {
     try {

@@ -69,15 +69,7 @@
         </li>
       </ul>
 
-      <div class="nav-section-title">Administration</div>
-      <ul class="nav-menu">
-        <li>
-          <a href="admin.html" class="nav-link">
-            <svg viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-            Admin Panel
-          </a>
-        </li>
-      </ul>
+
 
       <div class="sidebar-footer">
         <div class="user-card">
@@ -182,39 +174,64 @@
   </div>
 
   <script src="js/mock-data.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
   <script>
-    function handleProfileUpdate(e) {
+    async function handleProfileUpdate(e) {
       e.preventDefault();
       const name = document.getElementById('profFullName').value.trim();
       const phone = document.getElementById('profPhone').value.trim();
+      const email = getCurrentUserEmail();
+
+      try {
+        await BankAPI.updateProfile(email, { fullName: name, phone: phone });
+        showToast('Profile information saved in database!', 'success');
+      } catch (err) {
+        showToast('Profile updated locally: ' + err.message, 'info');
+      }
 
       const data = getBankData();
       data.customer.fullName = name;
       data.customer.phone = phone;
       saveBankData(data);
       syncCustomerUI();
-      showToast('Profile information updated successfully!', 'success');
     }
 
-    function handlePasswordChange(e) {
+    async function handlePasswordChange(e) {
       e.preventDefault();
       const current = document.getElementById('currentPass').value;
       const newP = document.getElementById('newPass').value;
       const confirmP = document.getElementById('confirmPass').value;
+      const email = getCurrentUserEmail();
 
       if (newP !== confirmP) {
         showToast('Password mismatch: New password and confirmation must match.', 'error');
         return;
       }
 
-      showToast('Security password changed successfully!', 'success');
-      document.getElementById('currentPass').value = '';
-      document.getElementById('newPass').value = '';
-      document.getElementById('confirmPass').value = '';
+      try {
+        await BankAPI.updateProfile(email, { currentPassword: current, newPassword: newP });
+        showToast('Security password changed and hashed successfully!', 'success');
+        document.getElementById('currentPass').value = '';
+        document.getElementById('newPass').value = '';
+        document.getElementById('confirmPass').value = '';
+      } catch (err) {
+        showToast('Password update failed: ' + err.message, 'error');
+      }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      const email = getCurrentUserEmail();
+      try {
+        const live = await BankAPI.getAccountDetails(email);
+        if (live) {
+          document.getElementById('profFullName').value = live.fullName;
+          document.getElementById('profEmail').value = live.email;
+          document.getElementById('profPhone').value = live.phone || '';
+          return;
+        }
+      } catch (e) {}
+
       const data = getBankData();
       if (data && data.customer) {
         document.getElementById('profFullName').value = data.customer.fullName;
