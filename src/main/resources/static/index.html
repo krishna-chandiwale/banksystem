@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Banking Management System - Corporate Preview</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <style>
+    .portal-hero {
+      text-align: center;
+      padding: 50px 20px 36px;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+    .portal-hero h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--navy-950);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .portal-hero h1 span {
+      color: var(--blue-600);
+    }
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      max-width: 1200px;
+      margin: 16px auto 60px;
+      padding: 0 20px;
+    }
+    .page-preview-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+      box-shadow: var(--shadow-sm);
+    }
+    .page-preview-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--blue-600);
+      box-shadow: var(--shadow-md);
+    }
+    .page-num {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--blue-600);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .page-card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy-950);
+      margin-bottom: 6px;
+    }
+    .page-card-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .page-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-hero">
+    <div class="brand-badge" style="display: inline-block; margin-bottom: 12px; background: var(--blue-50); color: var(--blue-600);">
+      CORPORATE BANKING ARCHITECTURE
+    </div>
+    <h1>Apex Banking <span>Management System</span></h1>
+    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6;">
+      Redesigned corporate banking portal featuring a professional Navy & Royal Blue theme,
+      soft-deletion safety controls, saved payee management, and an immutable audit ledger.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 12px; margin-top: 22px; flex-wrap: wrap;">
+      <a href="dashboard.html" class="btn btn-primary">
+        Open Customer Dashboard
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+      <a href="admin.html" class="btn btn-secondary">
+        Open Admin Panel (Account Deletion & Safety)
+      </a>
+      <a href="login.html" class="btn btn-outline">
+        Login Portal
+      </a>
+    </div>
+  </div>
+
+  <div class="portal-grid">
+    
+    <!-- 1. Login Page -->
+    <a href="login.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 01</div>
+        <div class="page-card-title">Online Banking Login</div>
+        <div class="page-card-desc">Customer and administrator authentication with security credentials, 256-bit encryption badge, and demo auto-fill.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-info">Authentication</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+    <!-- 2. Customer Registration -->
+    <a href="register.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 02</div>
+        <div class="page-card-title">Customer Registration</div>
+        <div class="page-card-desc">New account application form with account type selection, minimum deposit verification, and instant virtual card creation.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-success">Onboarding</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+    <!-- 3. Banking Dashboard -->
+    <a href="dashboard.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 03</div>
+        <div class="page-card-title">Banking Dashboard</div>
+        <div class="page-card-desc">Financial hub with executive navy debit card, real-time balance metrics, quick operations, and saved beneficiaries list.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-success">Core Portal</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+    <!-- 4. Deposit Money -->
+    <a href="deposit.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 04</div>
+        <div class="page-card-title">Deposit Money</div>
+        <div class="page-card-desc">Direct account credit interface with quick amount selector pills ($100 to $5000), channel selection, and balance updates.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-success">Credit Operation</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+    <!-- 5. Withdraw Money -->
+    <a href="withdraw.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 05</div>
+        <div class="page-card-title">Withdraw Cash</div>
+        <div class="page-card-desc">Cash withdrawal with automated overdraft protection: strictly prevents withdrawing more than the available balance.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-danger">Debit Operation</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+    <!-- 6. Money Transfer -->
+    <a href="transfer.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 06</div>
+        <div class="page-card-title">Money Transfer & Beneficiaries</div>
+        <div class="page-card-desc">Transfer funds with saved payees list, quick payee selection, and confirmation modal before removing any saved beneficiary.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-info">P2P Transfers & Delete</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+    <!-- 7. Transaction History -->
+    <a href="transactions.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 07</div>
+        <div class="page-card-title">Transaction History & Statement</div>
+        <div class="page-card-desc">Official statement ledger with dynamic filtering and search. Includes regulatory notice: records cannot be deleted or altered.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-info">Auditing & Compliance</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+    <!-- 8. Admin Dashboard -->
+    <a href="admin.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 08</div>
+        <div class="page-card-title">Admin Dashboard & Customer Management</div>
+        <div class="page-card-desc">Master administration to deactivate accounts or purge inactive records. Enforces safety rule: accounts with balance &gt; $0 cannot be deleted.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-warning">Admin & Delete Safety</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+    <!-- 9. Account Details -->
+    <a href="account-details.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 09</div>
+        <div class="page-card-title">Account Details & Statement</div>
+        <div class="page-card-desc">Comprehensive account breakdown with IBAN, Swift code, daily limits, interest rates, account status, and transaction ledger.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-info">Account Breakdown</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+    <!-- 10. Profile Management -->
+    <a href="profile.html" class="page-preview-card">
+      <div>
+        <div class="page-num">PAGE 10</div>
+        <div class="page-card-title">Profile Management & Settings</div>
+        <div class="page-card-desc">Customer profile update portal with personal info editor, contact phone, residential address, password change, and security settings.</div>
+      </div>
+      <div class="page-badge-row">
+        <span class="badge badge-success">Settings & Profile</span>
+        <span style="color: var(--blue-600); font-weight: 700; font-size: 0.8rem;">Open Page →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer style="text-align: center; padding: 24px; color: var(--text-muted); font-size: 0.82rem; border-top: 1px solid var(--border-color);">
+    Apex Banking Management System • College Project Architecture • Built with Java, Spring Boot, HTML, CSS & JavaScript
+  </footer>
+
+</body>
+</html>

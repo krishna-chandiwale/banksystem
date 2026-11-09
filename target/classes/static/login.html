@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Banking Login - Apex Banking System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      
+      <!-- Side Corporate Banner -->
+      <div class="auth-side-banner">
+        <div class="brand" style="border:none; padding:0; margin:0;">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm0 3.3L16.2 7H7.8L12 5.3zM4 11v7h3v-7H4zm6 0v7h4v-7h-4zm7 0v7h3v-7h-3zm-15 9v2h20v-2H2z"/></svg>
+          </div>
+          <div>
+            <div class="brand-title">APEX BANK</div>
+            <span class="brand-badge">SECURE RETAIL BANKING</span>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="auth-hero-title">Trusted Online Banking for Personal & Business</h2>
+          <p class="auth-hero-desc">Secure account management with continuous fraud surveillance, instant fund transfers, and verified financial protection.</p>
+          
+          <div class="security-badges">
+            <div class="sec-item">
+              <div class="sec-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <span>256-Bit TLS Financial Encryption</span>
+            </div>
+            <div class="sec-item">
+              <div class="sec-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <span>Continuous Account Security Monitor</span>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size: 0.76rem; color: #94a3b8;">© 2026 Apex Banking Systems Inc. Member FDIC.</p>
+      </div>
+
+      <!-- Auth Form Side -->
+      <div class="auth-form-side">
+        <div class="auth-header">
+          <h1 class="auth-title">Online Banking Sign In</h1>
+          <p class="auth-subtitle">Enter your credentials to access your account</p>
+        </div>
+
+        <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email Address or Account Number</label>
+            <input type="text" id="loginEmail" class="form-control" placeholder="alex.morgan@college.edu" value="alex.morgan@college.edu" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Security Password</label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••••••" value="password123" required>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; font-size: 0.84rem;">
+            <label style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); cursor: pointer;">
+              <input type="checkbox" checked style="accent-color: var(--blue-600);"> Remember this device
+            </label>
+            <a href="#" style="color: var(--blue-600); font-weight: 600;">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 0.95rem;">
+            Sign In to Account
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+
+          <div class="demo-credentials-box">
+            <strong>Preview Demo Credentials:</strong><br>
+            • Customer: <code>alex.morgan@college.edu</code> / <code>password123</code><br>
+            • Admin: <code>admin@apexbank.com</code> / <code>admin123</code>
+          </div>
+
+          <div class="auth-footer">
+            Don't have an active account? <a href="register.html">Apply for New Account</a>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      showToast('Authenticating with secure server...', 'success');
+      setTimeout(() => {
+        if (email.toLowerCase().includes('admin')) {
+          window.location.href = 'admin.html';
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+      }, 500);
+    }
+  </script>
+</body>
+</html>

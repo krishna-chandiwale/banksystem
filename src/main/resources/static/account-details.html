@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Details - Apex Banking System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm0 3.3L16.2 7H7.8L12 5.3zM4 11v7h3v-7H4zm6 0v7h4v-7h-4zm7 0v7h3v-7h-3zm-15 9v2h20v-2H2z"/></svg>
+        </div>
+        <div>
+          <div class="brand-title">APEX BANK</div>
+          <span class="brand-badge">RETAIL PORTAL</span>
+        </div>
+      </div>
+
+      <div class="nav-section-title">Core Banking</div>
+      <ul class="nav-menu">
+        <li>
+          <a href="dashboard.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="account-details.html" class="nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+            Account Details
+          </a>
+        </li>
+        <li>
+          <a href="deposit.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+            Deposit Money
+          </a>
+        </li>
+        <li>
+          <a href="withdraw.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M20 12H4"/></svg>
+            Withdraw Cash
+          </a>
+        </li>
+        <li>
+          <a href="transfer.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+            Transfer Funds
+          </a>
+        </li>
+        <li>
+          <a href="transactions.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            Statement & History
+          </a>
+        </li>
+        <li>
+          <a href="profile.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            Profile Management
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-section-title">Administration</div>
+      <ul class="nav-menu">
+        <li>
+          <a href="admin.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Admin Panel
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar val-name">AM</div>
+          <div class="user-info">
+            <div class="user-name val-name">Alex Morgan</div>
+            <div class="user-role">Acc: <span class="val-accno">ACT88204910</span></div>
+          </div>
+          <a href="login.html" title="Logout" style="color: #94a3b8; padding: 4px;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <button class="mobile-toggle" aria-label="Toggle navigation">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="topbar-greeting">
+            <h1>Account Specification & Limits</h1>
+            <p>Verified Bank Account Portfolio for <span class="val-name">Alex Morgan</span></p>
+          </div>
+        </div>
+
+        <div class="pill-badge">
+          <span>Account Standing:</span>
+          <strong style="color: var(--green-600); margin-left: 4px;">Verified (Tier 1)</strong>
+        </div>
+      </header>
+
+      <!-- Account Overview Specification Card -->
+      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; margin-bottom: 24px;">
+        
+        <div class="card">
+          <div class="section-title" style="margin-bottom: 16px;">Primary Account Details</div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+            <div>
+              <div style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Account Number</div>
+              <div style="font-size: 1.15rem; font-weight: 800; font-family: var(--font-mono); color: var(--blue-600); margin-top: 4px;" class="val-accno">ACT88204910</div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Account Category</div>
+              <div style="font-size: 1.15rem; font-weight: 800; color: var(--navy-950); margin-top: 4px;" class="val-acctype">SAVINGS</div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Routing Transit Number</div>
+              <div style="font-size: 1.05rem; font-weight: 700; font-family: var(--font-mono); color: var(--navy-950); margin-top: 4px;">021000021</div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">SWIFT / BIC Code</div>
+              <div style="font-size: 1.05rem; font-weight: 700; font-family: var(--font-mono); color: var(--navy-950); margin-top: 4px;">APEXUS33XXX</div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Annual Percentage Yield</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--green-600); margin-top: 4px;">4.20% APY</div>
+            </div>
+
+            <div>
+              <div style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Servicing Branch</div>
+              <div style="font-size: 1.05rem; font-weight: 700; color: var(--navy-950); margin-top: 4px;">Metro Financial HQ (01)</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="deposit.html" class="btn btn-primary btn-sm">Deposit Funds</a>
+            <a href="transfer.html" class="btn btn-secondary btn-sm">Initiate Wire</a>
+            <a href="transactions.html" class="btn btn-secondary btn-sm">Statement</a>
+          </div>
+        </div>
+
+        <!-- Account Security & Transfer Limits Card -->
+        <div class="card">
+          <div class="section-title" style="margin-bottom: 16px;">Daily Limits & Protection</div>
+          
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="background: var(--bg-subtle); padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--navy-950);">Daily ATM Cash Limit</span>
+                <strong style="color: var(--blue-600); font-family: var(--font-mono);">$5,000.00</strong>
+              </div>
+              <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 3px;">Max withdrawal per calendar day</div>
+            </div>
+
+            <div style="background: var(--bg-subtle); padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--navy-950);">Electronic Wire Transfer Limit</span>
+                <strong style="color: var(--blue-600); font-family: var(--font-mono);">$25,000.00</strong>
+              </div>
+              <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 3px;">P2P and ACH domestic transfers</div>
+            </div>
+
+            <div style="background: var(--bg-subtle); padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--navy-950);">FDIC Insurance Coverage</span>
+                <span class="badge badge-success">ACTIVE ($250,000)</span>
+              </div>
+              <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 3px;">Fully insured by federal insurance guarantee</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

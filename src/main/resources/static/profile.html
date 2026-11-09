@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Management - Apex Banking System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm0 3.3L16.2 7H7.8L12 5.3zM4 11v7h3v-7H4zm6 0v7h4v-7h-4zm7 0v7h3v-7h-3zm-15 9v2h20v-2H2z"/></svg>
+        </div>
+        <div>
+          <div class="brand-title">APEX BANK</div>
+          <span class="brand-badge">RETAIL PORTAL</span>
+        </div>
+      </div>
+
+      <div class="nav-section-title">Core Banking</div>
+      <ul class="nav-menu">
+        <li>
+          <a href="dashboard.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="account-details.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+            Account Details
+          </a>
+        </li>
+        <li>
+          <a href="deposit.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+            Deposit Money
+          </a>
+        </li>
+        <li>
+          <a href="withdraw.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M20 12H4"/></svg>
+            Withdraw Cash
+          </a>
+        </li>
+        <li>
+          <a href="transfer.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+            Transfer Funds
+          </a>
+        </li>
+        <li>
+          <a href="transactions.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            Statement & History
+          </a>
+        </li>
+        <li>
+          <a href="profile.html" class="nav-link active">
+            <svg viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            Profile Management
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-section-title">Administration</div>
+      <ul class="nav-menu">
+        <li>
+          <a href="admin.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Admin Panel
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar val-name">AM</div>
+          <div class="user-info">
+            <div class="user-name val-name">Alex Morgan</div>
+            <div class="user-role">Acc: <span class="val-accno">ACT88204910</span></div>
+          </div>
+          <a href="login.html" title="Logout" style="color: #94a3b8; padding: 4px;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <button class="mobile-toggle" aria-label="Toggle navigation">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="topbar-greeting">
+            <h1>Profile & Security Settings</h1>
+            <p>Manage your account credentials and personal contact details</p>
+          </div>
+        </div>
+
+        <div class="pill-badge">
+          <span>Security Status:</span>
+          <strong style="color: var(--green-600); margin-left: 4px;">2FA Active</strong>
+        </div>
+      </header>
+
+      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px;">
+        
+        <!-- Profile Information Form -->
+        <div class="card">
+          <div class="section-title" style="margin-bottom: 6px;">Personal Information</div>
+          <p style="color: var(--text-muted); font-size: 0.84rem; margin-bottom: 20px;">
+            Update your registered name and primary mobile contact.
+          </p>
+
+          <form id="profileForm" onsubmit="handleProfileUpdate(event)">
+            <div class="form-group">
+              <label class="form-label">Full Legal Name</label>
+              <input type="text" id="profFullName" class="form-control" value="Alex Morgan" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address (Immutable Primary ID)</label>
+              <input type="email" id="profEmail" class="form-control" value="alex.morgan@college.edu" disabled style="background-color: var(--bg-subtle); color: var(--text-muted); cursor: not-allowed;">
+              <div class="form-helper">For security, email modifications require branch verification.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Mobile Phone Number</label>
+              <input type="tel" id="profPhone" class="form-control" value="+1 (555) 382-9012" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 8px;">
+              Save Contact Changes
+            </button>
+          </form>
+        </div>
+
+        <!-- Security & Password Change Form -->
+        <div class="card">
+          <div class="section-title" style="margin-bottom: 6px;">Change Security Password</div>
+          <p style="color: var(--text-muted); font-size: 0.84rem; margin-bottom: 20px;">
+            Ensure your account is protected with a strong, distinct password.
+          </p>
+
+          <form id="passwordForm" onsubmit="handlePasswordChange(event)">
+            <div class="form-group">
+              <label class="form-label">Current Password</label>
+              <input type="password" id="currentPass" class="form-control" placeholder="••••••••••••" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">New Password</label>
+              <input type="password" id="newPass" class="form-control" placeholder="Minimum 8 characters" minlength="8" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Confirm New Password</label>
+              <input type="password" id="confirmPass" class="form-control" placeholder="Re-enter new password" minlength="8" required>
+            </div>
+
+            <button type="submit" class="btn btn-secondary" style="margin-top: 8px;">
+              Update Password
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function handleProfileUpdate(e) {
+      e.preventDefault();
+      const name = document.getElementById('profFullName').value.trim();
+      const phone = document.getElementById('profPhone').value.trim();
+
+      const data = getBankData();
+      data.customer.fullName = name;
+      data.customer.phone = phone;
+      saveBankData(data);
+      syncCustomerUI();
+      showToast('Profile information updated successfully!', 'success');
+    }
+
+    function handlePasswordChange(e) {
+      e.preventDefault();
+      const current = document.getElementById('currentPass').value;
+      const newP = document.getElementById('newPass').value;
+      const confirmP = document.getElementById('confirmPass').value;
+
+      if (newP !== confirmP) {
+        showToast('Password mismatch: New password and confirmation must match.', 'error');
+        return;
+      }
+
+      showToast('Security password changed successfully!', 'success');
+      document.getElementById('currentPass').value = '';
+      document.getElementById('newPass').value = '';
+      document.getElementById('confirmPass').value = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const data = getBankData();
+      if (data && data.customer) {
+        document.getElementById('profFullName').value = data.customer.fullName;
+        document.getElementById('profEmail').value = data.customer.email;
+        document.getElementById('profPhone').value = data.customer.phone;
+      }
+    });
+  </script>
+</body>
+</html>

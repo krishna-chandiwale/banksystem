@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard - Apex Banking System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7v2h20V7L12 2zm0 3.3L16.2 7H7.8L12 5.3zM4 11v7h3v-7H4zm6 0v7h4v-7h-4zm7 0v7h3v-7h-3zm-15 9v2h20v-2H2z"/></svg>
+        </div>
+        <div>
+          <div class="brand-title">APEX BANK</div>
+          <span class="brand-badge">RETAIL PORTAL</span>
+        </div>
+      </div>
+
+      <div class="nav-section-title">Core Banking</div>
+      <ul class="nav-menu">
+        <li>
+          <a href="dashboard.html" class="nav-link active">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="deposit.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+            Deposit Money
+          </a>
+        </li>
+        <li>
+          <a href="withdraw.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M20 12H4"/></svg>
+            Withdraw Cash
+          </a>
+        </li>
+        <li>
+          <a href="transfer.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+            Transfer Funds
+          </a>
+        </li>
+        <li>
+          <a href="transactions.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            Statement & History
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-section-title">Administration</div>
+      <ul class="nav-menu">
+        <li>
+          <a href="admin.html" class="nav-link">
+            <svg viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Admin Panel
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar val-name">AM</div>
+          <div class="user-info">
+            <div class="user-name val-name">Alex Morgan</div>
+            <div class="user-role">Acc: <span class="val-accno">ACT88204910</span></div>
+          </div>
+          <a href="login.html" title="Logout" style="color: #94a3b8; padding: 4px;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <button class="mobile-toggle" aria-label="Toggle navigation">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="topbar-greeting">
+            <h1>Account Overview, <span class="val-name">Alex</span></h1>
+            <p>Primary Account #<span class="val-accno">ACT88204910</span> (<span class="val-acctype">SAVINGS</span>)</p>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="pill-badge">
+            <span class="pulse-dot"></span>
+            <span>Core Banking Online</span>
+          </div>
+          <a href="transfer.html" class="btn btn-primary btn-sm" style="padding: 9px 16px;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            Send Money
+          </a>
+        </div>
+      </header>
+
+      <!-- Stats Grid -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Available Balance</div>
+            <div class="stat-value val-balance">$24,850.75</div>
+            <div class="stat-trend trend-up">
+              <span>Verified Funds</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon green">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12"/></svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Monthly Inflow</div>
+            <div class="stat-value val-income">$6,500.00</div>
+            <div class="stat-trend trend-up">
+              <span>Deposits & Payroll</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon red">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6"/></svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Monthly Outflow</div>
+            <div class="stat-value val-expense">$2,140.25</div>
+            <div class="stat-trend trend-down">
+              <span>Transfers & Debits</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon navy">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Savings Target</div>
+            <div class="stat-value val-savings">$30,000.00</div>
+            <div class="stat-trend trend-up">
+              <span>82.8% Completed</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2-Column Section: Virtual Card + Quick Actions -->
+      <section class="dashboard-columns">
+        
+        <!-- Virtual Debit Card -->
+        <div class="virtual-card-wrapper">
+          <div class="card-top">
+            <span class="bank-logo-text">APEX PREMIER PLATINUM</span>
+            <div class="card-chip"></div>
+          </div>
+
+          <div class="card-number">4532 •••• •••• 9012</div>
+
+          <div class="card-bottom">
+            <div>
+              <div class="card-holder-label">Account Holder</div>
+              <div class="card-holder-name val-name">Alex Morgan</div>
+            </div>
+            <div>
+              <div class="card-holder-label">Expires</div>
+              <div class="card-valid-thru">08/30</div>
+            </div>
+            <div>
+              <div class="card-holder-label">CVV</div>
+              <div class="card-valid-thru">•••</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Transfer Shortcuts Card -->
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="section-title">Quick Actions</div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 2px;">Perform standard account operations with single-click access.</p>
+            
+            <div class="quick-actions">
+              <a href="deposit.html" class="action-btn">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                Deposit
+              </a>
+              <a href="withdraw.html" class="action-btn">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"/></svg>
+                Withdraw
+              </a>
+              <a href="transfer.html" class="action-btn">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                Transfer
+              </a>
+            </div>
+          </div>
+
+          <div style="margin-top: 18px; padding: 12px 14px; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--navy-950);">Official Statement</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">Verified Monthly Ledger</div>
+            </div>
+            <a href="transactions.html" class="btn btn-secondary btn-sm">View Statement</a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 2-Column: Recent Transactions (With Delete Option) + Saved Beneficiaries -->
+      <div style="display: grid; grid-template-columns: 1.55fr 1fr; gap: 22px; align-items: start;">
+        
+        <!-- Recent Transactions Table with Delete Action on the Right -->
+        <section class="card">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Recent Transactions</h2>
+              <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 2px;">Recent activity with deletion option</p>
+            </div>
+            <a href="transactions.html" class="btn btn-secondary btn-sm">All Records</a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="bank-table">
+              <thead>
+                <tr>
+                  <th>Reference</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Date & Time</th>
+                  <th>Amount</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="transactionRows">
+                <!-- Loaded dynamically by app.js with Delete button -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Saved Beneficiaries (Delete option removed from this side) -->
+        <section class="card">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Saved Beneficiaries</h2>
+              <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 2px;">Quick payees directory</p>
+            </div>
+            <a href="transfer.html" class="btn btn-primary btn-sm">+ Add</a>
+          </div>
+
+          <div class="beneficiary-list" id="beneficiaryList">
+            <!-- Rendered cleanly with Pay button; delete option removed -->
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTransactions();
+      renderBeneficiaryList();
+    });
+  </script>
+</body>
+</html>
